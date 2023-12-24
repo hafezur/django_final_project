@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block body %}
+{% if request.user.is_authenticated %}
+<div style="width: 80%; background-color:aquamarine; margin: auto; padding: 1%; border-radius: 1cap;">
+        <table  class="table table-striped">
+            <thead >
+                <tr>
+                  <th scope="col">#id</th>
+                  <th scope="col">date</th>
+                  <th scope="col">Trade Code</th>
+                  <th scope="col">High </th>
+                  <th scope="col">Low</th>
+                  <th scope="col">Open</th>
+                  <th scope="col">Close</th>
+                  <th scope="col">Volume</th>
+                  <th scope="col">Update & Delete</th>
+                </tr>
+            </thead>
+            <tbody >
+              
+            {% for item in  value%}
+            <tr>
+                <td>{{item.id}}</td>
+                <td>{{item.date}}</td>
+                <td>{{item.trade_code}}</td>
+                <td>{{item.high}}</td>
+                <td>{{item.low}}</td>
+                <td>{{item.open}}</td>
+                <td>{{item.close}}</td>
+                <td>{{item.volume}}</td>
+                <td><a class="btn btn-info"  style="background-color:black; border-radius: 3px;" href="{% url 'edit_data' item.id %}">update</a><a class="btn btn-info"  style="background-color:chocolate; border-radius: 3px; margin-left: 10px;" href="{% url 'delete_data' item.id %}">Delete</a></td>
+            </tr>
+            {% endfor %}
+           </tbody>
+        </table>
+</div>
+{%else%}
+<h1 style="text-align: center;">Please Register Or login and Then Try Again</h1>
+{% endif %}
+{% endblock %}
